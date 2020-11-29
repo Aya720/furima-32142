@@ -22,16 +22,16 @@
 | user          | references | foreign_key: true              |
 | name          | string     | null: false                    |
 | detail        | text       | null: false                    |
-| category      | string     | null: false                    |
-| state         | string     | null: false                    |
-| postage       | string     | null: false                    |
-| prefecture    | string     | null: false                    |
+| category      | integer     | null: false                   |
+| state         | integer     | null: false                   |
+| postage       | integer     | null: false                   |
+| prefecture_id | integer     | null: false                   |
 | shipping_date | integer    | null: false                    |
 | price         | integer    | null: false                    |
 
 ### Association
 - belongs_to: user
-- has_one: credit_card
+- has_one: order
 
 ## ordersテーブル
 
@@ -51,7 +51,7 @@
 | ------------ | ----------- | ------------------------------ |
 | order        | references  | foreign_key: true              |
 | zip          | string      | null: false                    |
-| prefecture   | string      | null: false                    |
+| prefecture_id| integer     | null: false                    |
 | city         | string      | null: false                    |
 | street       | string      | null: false                    |
 | apartment    | string      |                                |
