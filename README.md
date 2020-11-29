@@ -58,4 +58,4 @@
 | phone        | string      | null: false                    |
 
 ### Association
-- belongs_to :credit_card
+- belongs_to :orders
