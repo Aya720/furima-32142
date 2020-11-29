@@ -13,21 +13,21 @@
 
 ### Association
 - has_many :items
-- has_one :credit_card
+- has_one :order
 
 ## itemsテーブル
 
-| Column        | Type       | Options                        |
-| ------------- | ---------- | ------------------------------ |
-| user          | references | foreign_key: true              |
-| name          | string     | null: false                    |
-| detail        | text       | null: false                    |
-| category      | integer     | null: false                   |
-| state         | integer     | null: false                   |
-| postage       | integer     | null: false                   |
-| prefecture_id | integer     | null: false                   |
-| shipping_date | integer    | null: false                    |
-| price         | integer    | null: false                    |
+| Column           | Type       | Options                        |
+| ---------------- | ---------- | ------------------------------ |
+| user             | references | foreign_key: true              |
+| name             | string     | null: false                    |
+| detail           | text       | null: false                    |
+| category_id      | integer     | null: false                   |
+| state_id         | integer     | null: false                   |
+| postage_id       | integer     | null: false                   |
+| prefecture_id    | integer     | null: false                   |
+| shipping_date_id | integer    | null: false                    |
+| price            | integer    | null: false                    |
 
 ### Association
 - belongs_to: user
@@ -58,4 +58,4 @@
 | phone        | string      | null: false                    |
 
 ### Association
-- belongs_to :orders
+- belongs_to :order
