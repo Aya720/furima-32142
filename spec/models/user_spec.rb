@@ -82,10 +82,24 @@ RSpec.describe User, type: :model do
         expect(@user.errors.full_messages).to include('Password is invalid')
       end
 
+      it 'passwordが全角だと登録できない' do
+        @user.password = 'ＡＡＡＡＡＡ'
+        @user.password_confirmation = 'ＡＡＡＡＡＡ'
+        @user.valid?
+        expect(@user.errors.full_messages).to include('Password is invalid')
+      end
+
       it 'passwordが6字以上でないと登録できない' do
         @user.password = '12345'
         @user.valid?
         expect(@user.errors.full_messages).to include('Password is too short (minimum is 6 characters)')
+      end
+
+      it 'passwordとpassword_confirmationが不一致では登録できない' do
+        @user.password = 'a12345'
+        @user.password_confirmation = 'a123456'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
       end
 
       # 一意性に関しては、FactoryBot を使用するとエラーオブジェクト(user.errors)が得られないので使用しない書き方に。
