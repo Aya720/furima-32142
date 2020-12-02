@@ -11,10 +11,6 @@ class User < ApplicationRecord
   #  ※※email,passwordはデフォルトで保存できるようになっている※※
   validates :nickname, :first_name, :last_name, :first_name_kana, :last_name_kana, :birthday, presence: true
 
-  # uniqueness:値が一意（unique）であり重複していないかを検証します。メールアドレスなど重複しては困るときに使う
-  # 「validates :カラム名, uniqueness: true」カラムにすでに存在している内容と同じものがあるかどうかを検証する。すでに値が存在していれば保存されません。「validates_uniqueness_of :カラム名」に書き換え可
-  validates :email, uniqueness: true
-
   # 値の長さを検証。{ minimum:  }でオプションを指定。4つある。minimum = 最小値を指定 /maximum = 最大値を指定 /in = 範囲を指定 /is = 文字数を指定 「validates_length_of :カラム名, maximum: 」に書き換え可
   # format:withオプションに指定した 正規表現=文字列の属性 と一致するかどうかを調べる。「validates :カラム名, format: { with: 正規表現}」赤字：パスワードに半角英数字だけ許可する
   validates :password, length: { minimum: 6 }, format: { with: /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i }, confirmation: true
