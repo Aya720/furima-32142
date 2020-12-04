@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  # もしdeviseに関するコントローラーの処理であれば、そのときだけconfigure_permitted_parametersメソッドを実行するよ
+  # もしdeviseに関するコントローラーの処理であれば、そのときだけconfigure_permitted_parametersメソッドを実行する
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   private
