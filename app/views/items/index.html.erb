@@ -127,7 +127,7 @@
     <ul class='item-lists'>
       <% @items.each do |item| %>
       <li class='list'>
-        <% link_to items_path %>
+        <%= link_to item_path(item.id), method: :get do %>
         <div class='item-img-content'>
           <%= image_tag item.image, class: "item-img" %>
 
@@ -143,15 +143,18 @@
             <%= item.name %>
           </h3>
           <div class='item-price'>
-            <span><%= item.price %>円<br><%= item.postage_id %></span>
+                                        <%# itemモデルがアソシエーションで組んでいるActiveHashのデータを引き出す時は、belongs_to で紐付けたモデル名をつなげる %>
+            <span><%= item.price %>円<br><%= item.postage.name %></span>
             <div class='star-btn'>
               <%= image_tag "star.png", class:"star-icon" %>
               <span class='star-count'>0</span>
             </div>
           </div>
         </div>
+        <% end %>
       </li>
       <% end %>
+      
       <% if @items.empty? %>
       <li class='list'>
         <%= link_to '#' do %>

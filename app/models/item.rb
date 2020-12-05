@@ -12,7 +12,12 @@ class Item < ApplicationRecord
   # 指定したファイル名は、そのモデルが設けたフォームから送られるパラメーターのキーにもなります。＝＞itemディレクトリのview内、form_withの中にあるimageは、ファイルを格納するキーにもなる
   has_one_attached :image
   belongs_to :user
+  has_one :order
 
   extend ActiveHash::Associations::ActiveRecordExtensions
-  belongs_to :category, :state, :postage, :prefecture, :shipping_date
+  belongs_to :category
+  belongs_to :state
+  belongs_to :postage
+  belongs_to :prefecture
+  belongs_to :shipping_date
 end
