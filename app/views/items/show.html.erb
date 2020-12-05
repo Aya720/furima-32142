@@ -8,6 +8,7 @@
     </h2>
     <div class='item-img-content'>
       <%= image_tag @item.image ,class:"item-box-img" %>
+
       <% if @item.order.present? %>
       <div class='sold-out'>
         <span>Sold Out!!</span>
@@ -24,19 +25,17 @@
       </span>
     </div>
 
-  <%# @変数.user_id の書き方：%>
-  <% if user_signed_in? && current_user.id == @item.user_id %>
-    <% if '商品詳細画面にアクセスしたユーザーが出品者かどうか' %>
+    <%# @変数.user_id の書き方：%>
+  
+    <% if user_signed_in? && current_user.id == @item.user_id %>
       <%= link_to '商品の編集', edit_item_path(@item.user_id), method: :get, class: "item-red-btn" %>
       <p class='or-text'>or</p>
       <%= link_to '削除', item_path(@item.user_id), method: :delete, class:'item-destroy' %>
-    <% elsif @item.order.blank? %>
-      <%# 商品が売れていない場合はこちらを表示しましょう %>
-      <%= link_to '購入画面に進む', "#" ,class:"item-red-btn"%>
-      <%# //商品が売れていない場合はこちらを表示しましょう %>
     <% end %>
-  <% end %>
-
+    <% if user_signed_in? %>
+        <%= link_to '購入画面に進む', "#" ,class:"item-red-btn"%>
+        <%# //商品が売れていない場合はこちらを表示しましょう %>
+    <% end %>
 
     <%# //ログインしているユーザーと出品しているユーザーが、同一人物の場合と同一人物ではない場合で、処理を分けましょう %>
 
@@ -47,7 +46,7 @@
       <tbody>
         <tr>
           <th class="detail-item">出品者</th>
-          <td class="detail-value"><%= @item.name %></td>
+          <td class="detail-value"><%= @item.user.nickname %></td>
         </tr>
         <tr>
           <th class="detail-item">カテゴリー</th>
