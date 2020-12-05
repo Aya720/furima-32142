@@ -7,7 +7,7 @@ class ItemsController < ApplicationController
     # itemsテーブルの全ての値を取得してくれる = .allの記述省略可
     # .includesで指定したモデルからアソシエーションが組んだ外部キーの値を持ってくる
     # orderメソッド .order("並び替えの基準となるカラム 並び順") 新しいものから古いもの＝DESC
-    @items = Item.includes(:user).order("created_at DESC")
+    @items = Item.includes(:user).order('created_at DESC')
   end
 
   def new
