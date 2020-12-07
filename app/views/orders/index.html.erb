@@ -1,0 +1,36 @@
+<%= render "shared/second-header"%>
+
+<div class='transaction-contents'>
+  <div class='transaction-main'>
+    <h1 class='transaction-title-text'>
+      購入内容の確認
+    </h1>
+    <%# 購入内容の表示 %>
+    <div class='buy-item-info'>
+      <%= image_tag @item.image, class: 'buy-item-img' %>
+      <div class='buy-item-right-content'>
+        <h2 class='buy-item-text'>
+          <%= @item.name %>
+        </h2>
+        <div class='buy-item-price'>
+          <p class='item-price-text'>¥<%= @item.price %></p>
+                                            <%# ここはアソシエーションを組んだクラス名。カラム名じゃない %>
+          <p class='item-price-sub-text'><%= @item.postage.name %></p>
+        </div>
+      </div>
+    </div>
+    <%# /購入内容の表示 %>
+
+    <%# 支払額の表示 %>
+    <div class='item-payment'>
+      <h1 class='item-payment-title'>
+        支払金額
+      </h1>
+      <p class='item-payment-price'>
+        ¥<%= @item.price %>
+      </p>
+    </div>
+    <%# /支払額の表示 %>
+  </div>
+</div>
+<%= render "shared/second-footer"%>
