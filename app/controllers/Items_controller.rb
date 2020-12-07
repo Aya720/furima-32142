@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
   # deviseのメソッド。before_actionで呼び出すことで、アクションを実行する前にログインしていなければログイン画面に遷移させられる。
   before_action :authenticate_user!, only: [:new, :edit]
   # 編集と詳細は誰のページなのか
-  before_action :set_item, only: [:show, :edit, :update]
+  before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :move_to_index, only: [:edit]
 
   def index
@@ -42,6 +42,11 @@ class ItemsController < ApplicationController
   end
 
   def destroy
+    unless current_user == @item.user
+      redirect_to item_path(@item.id)
+    else @item.destroy
+      redirect_to root_path
+    end
   end
 
   private
@@ -51,7 +56,8 @@ class ItemsController < ApplicationController
   end
 
   # 例えばshowのviewファイルで@itemを使って、userIdを取得できているのは⬇︎ここで値を変数化して使える状態にしているから
-  # 確認：.find(params[:id])
+  # モデル.find：モデルと紐づいているデータベースのテーブルから、レコードを1つ取り出す場合に、findメソッドを使う
+  # paramsとはRailsで送られてきた値を受け取るためのメソッド。params[:カラム名]で値を受け取ることができる。
   def set_item
     @item = Item.find(params[:id])
   end
