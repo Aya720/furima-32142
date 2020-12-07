@@ -3,7 +3,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new]
   # 編集と詳細は誰のページなのか
   before_action :set_item, only: [:show, :edit]
-  before_action :move_to_index, only: [:edit, :update]
+  before_action :move_to_index, only: [:edit]
 
   def index
     # includesメソッド モデル.includes(:アソシエーションを組んでいるモデル):引数に指定された関連モデルを1度のアクセスでまとめて取得。処理の回数を減らしてパフォーマンスが著しく下がることを防ぐ。
