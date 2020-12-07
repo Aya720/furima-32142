@@ -1,9 +1,9 @@
 class ItemsController < ApplicationController
   # deviseのメソッド。before_actionで呼び出すことで、アクションを実行する前にログインしていなければログイン画面に遷移させられる。
   before_action :authenticate_user!, only: [:new]
-  # 編集と詳細
+  # 編集と詳細は誰のページなのか
   before_action :set_item, only: [:show, :edit]
-  # before_action :set_postage, only: [:show, :index]
+  before_action :move_to_index, only: [:edit, :update]
 
   def index
     # includesメソッド モデル.includes(:アソシエーションを組んでいるモデル):引数に指定された関連モデルを1度のアクセスでまとめて取得。処理の回数を減らしてパフォーマンスが著しく下がることを防ぐ。
@@ -34,6 +34,12 @@ class ItemsController < ApplicationController
   end
 
   def update
+    @item = Item.find(params[:id])
+    if @item.update(item_params)
+      redirect_to item_path(@item.id)
+    else
+      render :edit
+    end
   end
 
   def destroy
@@ -46,11 +52,15 @@ class ItemsController < ApplicationController
   end
 
   # 例えばshowのviewファイルで@itemを使って、userIdを取得できているのは⬇︎ここで値を変数化して使える状態にしているから
-  # .find(params[:id])　　　　　　　　　　　　　　　　　　　　　　　　
+  # 確認：.find(params[:id])
   def set_item
     @item = Item.find(params[:id])
   end
 
-  # def set_postage
-  # end
+  def move_to_index
+    unless user_signed_in? && current_user == @item.user
+      redirect_to action: :index
+    end
+  end
 end
+
