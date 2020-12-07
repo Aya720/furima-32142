@@ -42,6 +42,9 @@ class ItemsController < ApplicationController
   end
 
   def destroy
+    item = Item.find(params[:id])
+    item.destroy
+    redirect_to root_path
   end
 
   private
@@ -51,7 +54,8 @@ class ItemsController < ApplicationController
   end
 
   # 例えばshowのviewファイルで@itemを使って、userIdを取得できているのは⬇︎ここで値を変数化して使える状態にしているから
-  # 確認：.find(params[:id])
+  # モデル.find：モデルと紐づいているデータベースのテーブルから、レコードを1つ取り出す場合に、findメソッドを使う
+  # paramsとはRailsで送られてきた値を受け取るためのメソッド。params[:カラム名]で値を受け取ることができる。
   def set_item
     @item = Item.find(params[:id])
   end
