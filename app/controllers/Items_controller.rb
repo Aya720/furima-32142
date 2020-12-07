@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
   # deviseのメソッド。before_actionで呼び出すことで、アクションを実行する前にログインしていなければログイン画面に遷移させられる。
   before_action :authenticate_user!, only: [:new, :edit]
   # 編集と詳細は誰のページなのか
-  before_action :set_item, only: [:show, :edit, :update]
+  before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :move_to_index, only: [:edit]
 
   def index
@@ -42,9 +42,11 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    item = Item.find(params[:id])
-    item.destroy
-    redirect_to root_path
+    unless current_user == @item.user
+      redirect_to item_path(@item.id)
+    else @item.destroy
+      redirect_to root_path
+    end
   end
 
   private
