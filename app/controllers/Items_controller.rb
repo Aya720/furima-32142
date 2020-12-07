@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   # deviseのメソッド。before_actionで呼び出すことで、アクションを実行する前にログインしていなければログイン画面に遷移させられる。
-  before_action :authenticate_user!, only: [:new]
+  before_action :authenticate_user!, only: [:new, :edit]
   # 編集と詳細は誰のページなのか
   before_action :set_item, only: [:show, :edit, :update]
   before_action :move_to_index, only: [:edit]
