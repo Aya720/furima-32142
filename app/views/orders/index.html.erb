@@ -32,7 +32,11 @@
     </div>
     <%# /支払額の表示 %>
 
+                                  <%# 購入ボタンを押した時に飛ぶアクションのurlが必要 %>
     <%= form_with model: @purchase, url: item_orders_path, id: 'charge-form', class: 'transaction-form-wrap',local: true do |f| %>
+
+    <%= render 'shared/error_messages', model: @purchase %>
+
     <%# 配送先の入力 %>
     <div class='shipping-address-form'>
       <h1 class='info-input-haedline'>
