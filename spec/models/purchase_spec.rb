@@ -60,26 +60,31 @@ RSpec.describe Purchase, type: :model do
         @purchase.valid?
         expect(@purchase.errors.full_messages).to include("Token can't be blank")
       end
+    end
 
-      context '商品購入がうまくいくとき' do
-        it 'zip、prefecture_id、city、street、phone、tokenが存在するとき' do
-          expect(@purchase).to be_valid
-        end
+    context '商品購入がうまくいくとき' do
+      it 'zip、prefecture_id、city、street、phone、token、user_id、item_idが存在するとき' do
+        expect(@purchase).to be_valid
+      end
 
-        it 'zipにハイフンがあること' do
-          @purchase.zip = '123-4567'
-          expect(@purchase).to be_valid
-        end
+      it 'zipにハイフンがあること' do
+        @purchase.zip = '123-4567'
+        expect(@purchase).to be_valid
+      end
 
-        it 'phoneにハイフンがないこと' do
-          @purchase.phone = '11111111111'
-          expect(@purchase).to be_valid
-        end
+      it 'apartmentが空でも購入できること' do
+        @purchase.apartment = ''
+        expect(@purchase).to be_valid
+      end
 
-        it 'phoneが11桁以内であること' do
-          @purchase.phone = '11111111111'
-          expect(@purchase).to be_valid
-        end
+      it 'phoneにハイフンがないこと' do
+        @purchase.phone = '11111111111'
+        expect(@purchase).to be_valid
+      end
+
+      it 'phoneが11桁以内であること' do
+        @purchase.phone = '11111111111'
+        expect(@purchase).to be_valid
       end
     end
   end

@@ -16,8 +16,6 @@ class OrdersController < ApplicationController
   def create
     # これを記述しないと、ストロングパラメータでmergeしたitem.id(params[:item_id])はどれ？、となる。
     # ここで呼んできたidがスロトングパラメータに入り保存されると共に、formオブジェクトのattr_accessorにもkeyを加える
-    @item = Item.find(params[:item_id])
-
     # 保存しなくともcreateアクションで処理をする時にpcの処理はindexの@itemの存在が気になるらしい。これを示さないとエラーになる。
     # @item = Item.find(params[:item_id])
 
@@ -49,7 +47,8 @@ class OrdersController < ApplicationController
   def pay_item
       # 決算で使う値はここに全ていれる。※保存するものではないのでformオブジェクトには入れない
       # priceを取得するためここでもitemの情報を取得させたい
-      @item = Item.find(params[:item_id])
+      # @item = Item.find(params[:item_id])   pay_itemメソッドを呼び出すcreateアクションでbefore_actionにてget_idメソッドを呼び出しているので記述はしなくてok
+
       # 「payjp」が提供する、Payjpクラスのapi_keyというインスタンスに秘密鍵を代入するけど、公開してはいけないため、環境変数にいれる。
       # 「APIの鍵情報は公開してはいけない」
       Payjp.api_key = ENV["PAYJP_SECRET_KEY"]

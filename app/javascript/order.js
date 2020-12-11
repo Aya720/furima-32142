@@ -7,7 +7,7 @@ const pay = () => {
   Payjp.setPublicKey(process.env.PAYJP_PUBLIC_KEY);
                        // ”charge-form”というidを指定して、フォーム全体の要素を取得している。ディベロッパーで確認するとフォームの大枠にidが付与されているのが確認できる//
   const form = document.getElementById("charge-form");
-  console.log(form);
+
   // そのフォームが送信（submit）されたときにイベント(指定した処理)が発火する。 //
   form.addEventListener("submit", (e) => {
     // e.preventDefault(); ▶︎通常のRuby on Railsにおけるフォーム送信処理はキャンセルさせている。ボタンをクリックしても、サーバーサイドへリクエストは送られない。
@@ -28,8 +28,6 @@ const pay = () => {
       exp_month: formData.get("purchase[exp_month]"),
       exp_year: `20${formData.get("purchase[exp_year]")}`,
     };
-    console.log(card)
-    // カード情報が受け取れているかの確認
     
     //カード情報をトークン化
     // のためにpay.jsが提供するPayjp.createToken(card, callback)というオブジェクトを使用。第一引数のcardは、PAY.JP側に送るカード情報。第二引数のcallbackには、PAY.JP側からトークンが送付された後に実行する処理を記述
@@ -42,9 +40,6 @@ const pay = () => {
         // response.idとすることでトークンの値を取得することができる。 // これまでのステップで、トークンを取得することができ
          // HTTPステータスコードが200のとき、すなわちうまく処理が完了したときだけ、トークンの値を取得するようにしている。
         const token = response.id;
-        console.log(token);
-        // tokenが受け取れているかの確認
-
 
         // ここからはトークンの値をサーバーサイドに情報を送信するためにフォームを作る //
         // getElementByIdで指定したIDに紐づく入力された値（ドキュメント要素）を取得

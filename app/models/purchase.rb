@@ -5,7 +5,7 @@ class Purchase # Formオブジェクトには < ApplicationRecord の記述は�
 
   # たとえmergeしてる内容でも⬇️こことストロングパラメータの記述はイコールの関係である必要がある。フォームから保存する値とイコール、なのではない。
   # じゃないと、PCがストロングパラメータを呼んだ時に 聞いてないから知らない、になりエラーが出される。
-  attr_accessor :zip, :prefecture_id, :city, :street, :apartment, :phone, :item_id, :user_id, :item_image, :token
+  attr_accessor :zip, :prefecture_id, :city, :street, :apartment, :phone, :item_id, :user_id, :token
 
   with_options presence: true do
   # 郵便番号にはハイフンが必要
@@ -14,8 +14,10 @@ class Purchase # Formオブジェクトには < ApplicationRecord の記述は�
   validates :city
   validates :street
   # 電話番号にはハイフンは不要で、11桁以内
-  validates :phone, format: { with: /\A\d{11}\z/ }
+  validates :phone, format: { with: /\A\d{10,11}\z/ }
   validates :token
+  validates :user_id
+  validates :item_id
   end
 
   def save
