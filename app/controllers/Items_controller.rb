@@ -56,7 +56,7 @@ class ItemsController < ApplicationController
   end
 
   # 例えばshowのviewファイルで@itemを使って、userIdを取得できているのは⬇︎ここで値を変数化して使える状態にしているから
-  # モデル.find：モデルと紐づいているデータベースのテーブルから、レコードを1つ取り出す場合に、findメソッドを使う
+  # モデル.find：主キーに対応するレコードを取り出すことができる
   # paramsとはRailsで送られてきた値を受け取るためのメソッド。params[:カラム名]で値を受け取ることができる。
   def set_item
     @item = Item.find(params[:id])

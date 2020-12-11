@@ -32,6 +32,12 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include('Category must be other than 0')
       end
 
+      it 'prefecture_idが空では登録できない' do
+        @item.prefecture_id = 0
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Prefecture must be other than 0')
+      end 
+
       it 'state_idが空では登録できない' do
         @item.state_id = 0
         @item.valid?

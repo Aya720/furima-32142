@@ -4,7 +4,11 @@
     <title>Furima32142</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    
+    <%# ユーザーがPAY.JPのAPIを使用するために読み込むJavaScriptのライブラリ。この中に、安全にクレジットカード情報をトークン化するための処理などが含まれている %>
+    <%# このように記述することで、ブラウザでアプリケーションを開いたときに、payjp.jsが読み込まれる %>
     <script type="text/javascript" src="https://js.pay.jp/v1/"></script>
+
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <%= javascript_pack_tag 'application' %>
   </head>
