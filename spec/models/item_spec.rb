@@ -6,6 +6,23 @@ RSpec.describe Item, type: :model do
   end
   # describe:どのようなテストコードを書いているのかを説明するための記述。do~endの間に記述し、入れ子構造をとる
   describe '商品登録' do
+
+    context '商品登録がうまくいくとき' do
+      it 'image、name、detail、category_id、state_id、postage_id、prefecture_id、shipping_date_id、price、imageが存在するとき' do
+        expect(@item).to be_valid
+      end
+
+      it '価格の範囲が、300円以上であること' do
+        @item.price = 300
+        expect(@item).to be_valid
+      end
+
+      it '価格の範囲が、9,999,999円以内であること' do
+        @item.price = 9_999_999
+        expect(@item).to be_valid
+      end
+    end
+
     # describeで条件分岐させたい時にcontextを用いる
     context '商品登録がうまくいかないとき' do
       it 'imageが空では登録できない' do
@@ -31,6 +48,12 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include('Category must be other than 0')
       end
+
+      it 'prefecture_idが空では登録できない' do
+        @item.prefecture_id = 0
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Prefecture must be other than 0')
+      end 
 
       it 'state_idが空では登録できない' do
         @item.state_id = 0
@@ -78,22 +101,6 @@ RSpec.describe Item, type: :model do
         @item.user = nil
         @item.valid?
         expect(@item.errors.full_messages).to include('User must exist')
-      end
-    end
-
-    context '商品登録がうまくいくとき' do
-      it 'image、name、detail、category_id、state_id、postage_id、prefecture_id、shipping_date_id、price、imageが存在するとき' do
-        expect(@item).to be_valid
-      end
-
-      it '価格の範囲が、300円以上であること' do
-        @item.price = 300
-        expect(@item).to be_valid
-      end
-
-      it '価格の範囲が、9,999,999円以内であること' do
-        @item.price = 9_999_999
-        expect(@item).to be_valid
       end
     end
   end
