@@ -6,6 +6,44 @@ RSpec.describe User, type: :model do
   end
   # describe:どのようなテストコードを書いているのかを説明するための記述。do~endの間に記述し、入れ子構造をとる
   describe 'ユーザー新規登録' do
+
+    context '新規登録がうまくいくとき' do
+      it 'nickname,email,password,password_confirmation,first_name,last_name,first_name_kana,last_name_kana,birthdayが存在すれば登録できる' do
+        # 「expect(インスタンス).to be_valid」：expectのインスタンスが正しく保存されることを判断
+        expect(@user).to be_valid
+      end
+
+      it 'passwordが半角英数字混合であれば登録できる' do
+        @user.password = 'a12345'
+        expect(@user).to be_valid
+      end
+
+      it 'passwordが6文字以上であれば登録できる' do
+        @user.password = 'a12345'
+        expect(@user).to be_valid
+      end
+
+      it 'first_nameが全角（漢字・ひらがな・カタカナ）であれば登録できる' do
+        @user.first_name = '太郎'
+        expect(@user).to be_valid
+      end
+
+      it 'last_nameが全角（漢字・ひらがな・カタカナ）であれば登録できる' do
+        @user.last_name = '山田'
+        expect(@user).to be_valid
+      end
+
+      it 'first_name_kanaが全角（カタカナ）であれば登録できる' do
+        @user.first_name_kana = 'タロウ'
+        expect(@user).to be_valid
+      end
+
+      it 'last_name_kanaが全角（カタカナ）であれば登録できる' do
+        @user.last_name_kana = 'ヤマダ'
+        expect(@user).to be_valid
+      end
+    end
+
     # describeで条件分岐させたい時にcontextを用いる
     context '新規登録がうまくいかないとき' do
       # it:「どのような結果になることを試しているのか」を記述。これらのitに記述するものは、exampleと言う
@@ -142,43 +180,6 @@ RSpec.describe User, type: :model do
         @user.email = 'aaaaaaaaa'
         @user.valid?
         expect(@user.errors.full_messages).to include('Email is invalid')
-      end
-    end
-
-    context '新規登録がうまくいくとき' do
-      it 'nickname,email,password,password_confirmation,first_name,last_name,first_name_kana,last_name_kana,birthdayが存在すれば登録できる' do
-        # 「expect(インスタンス).to be_valid」：expectのインスタンスが正しく保存されることを判断
-        expect(@user).to be_valid
-      end
-
-      it 'passwordが半角英数字混合であれば登録できる' do
-        @user.password = 'a12345'
-        expect(@user).to be_valid
-      end
-
-      it 'passwordが6文字以上であれば登録できる' do
-        @user.password = 'a12345'
-        expect(@user).to be_valid
-      end
-
-      it 'first_nameが全角（漢字・ひらがな・カタカナ）であれば登録できる' do
-        @user.first_name = '太郎'
-        expect(@user).to be_valid
-      end
-
-      it 'last_nameが全角（漢字・ひらがな・カタカナ）であれば登録できる' do
-        @user.last_name = '山田'
-        expect(@user).to be_valid
-      end
-
-      it 'first_name_kanaが全角（カタカナ）であれば登録できる' do
-        @user.first_name_kana = 'タロウ'
-        expect(@user).to be_valid
-      end
-
-      it 'last_name_kanaが全角（カタカナ）であれば登録できる' do
-        @user.last_name_kana = 'ヤマダ'
-        expect(@user).to be_valid
       end
     end
   end

@@ -61,7 +61,6 @@ const pay = () => {
         document.getElementById("card-exp-month").removeAttribute("purchase[exp_month]");
         document.getElementById("card-exp-year").removeAttribute("purchase[exp_year]");
 
-
         // サーバーサイドにフォームの情報を送る
         // Railsにおけるフォーム送信処理はキャンセルしているのでJavaScript側からフォームの送信処理を行う必要がある
         document.getElementById("charge-form").submit();
