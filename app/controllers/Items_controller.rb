@@ -4,7 +4,7 @@ class ItemsController < ApplicationController
   # 編集と詳細は誰のページなのか
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :move_to_index, only: [:edit]
-
+  before_action :sold_out_item, only: [:edit]
   def index
     # includesメソッド モデル.includes(:アソシエーションを組んでいるモデル):引数に指定された関連モデルを1度のアクセスでまとめて取得。処理の回数を減らしてパフォーマンスが著しく下がることを防ぐ。
     # itemsテーブルの全ての値を取得してくれる = .allの記述省略可
@@ -64,5 +64,9 @@ class ItemsController < ApplicationController
 
   def move_to_index
     redirect_to action: :index unless current_user == @item.user
+  end
+
+  def sold_out_item
+    redirect_to root_path if @item.order.present?
   end
 end
