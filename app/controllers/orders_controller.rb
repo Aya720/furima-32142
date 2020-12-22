@@ -26,7 +26,7 @@ class OrdersController < ApplicationController
        @purchase.save
        redirect_to root_path
      else
-       # render action: :index  と記述すると、actionのindexを通ってindex.erbに戻るよ、ということになる
+       # redirect_to action: :index  と記述すると、actionのindexを通ってindex.erbに戻るよ、ということになる
        # render 'index'  だと、createアクションで読み込まれた情報を持って、indexに戻るので、結果保存できない状態の時に、それをエラーとして読み取ってエラー表示してくれる。
        render 'index'
      end

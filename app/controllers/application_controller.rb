@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
   def basic_auth
     # authenticate_or_request_with_http_basicメソッド:ブロック内部でusernameとpasswordを設定することでBasic認証を利用できるようになる
     authenticate_or_request_with_http_basic do |username, password|
-      username == ENV["BASIC_AUTH_USER"] && password == ENV["BASIC_AUTH_PASSWORD"]
+      username == ENV["BASIC_AUTH_USER_FURIMA"] && password == ENV["BASIC_AUTH_PASSWORD_FURIMA"]
     end
   end
 end

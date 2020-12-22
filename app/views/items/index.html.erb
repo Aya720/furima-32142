@@ -127,6 +127,7 @@
     <ul class='item-lists'>
       <% @items.each do |item| %>
       <li class='list'>
+        <%# railsがitemモデルを軸にパスを作っていて、これを元にアクション内で値を引き出している %>
         <%= link_to item_path(item.id), method: :get do %>
         <div class='item-img-content'>
           <%= image_tag item.image, class: "item-img" %>

@@ -59,7 +59,10 @@ class ItemsController < ApplicationController
   # モデル名.find：主キーに対応するレコードを取り出すことができる
   # paramsとはRailsで送られてきた値を受け取るためのメソッド。params[:カラム名]で値を受け取ることができる。
   def set_item
+    # paramsはユーザーが入力した値を格納しているもの、と言う認識があったけれど、パスではrailsが用意したidの情報を格納するのに使われている
     @item = Item.find(params[:id])
+    # 
+    # @order = Order.find_by(item_id: params[:id])
   end
 
   def move_to_index
